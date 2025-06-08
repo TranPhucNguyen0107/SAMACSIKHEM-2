@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'iCiel Brush Up';
+    src: url('iCielBrushUp.woff2') format('woff2'),
+        url('iCielBrushUp.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
