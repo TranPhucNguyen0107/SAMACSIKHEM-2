@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SIKHEM 1 – Tiếp bước hy vọng</title>
+    <title>SA MẠC 2024 – CÙNG MẸ LÊN ĐƯỜNG</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap"
       rel="stylesheet"
@@ -25,20 +25,20 @@
       }
 
       :root {
-        --primary: #f66435; /* Exotic Orange */
-        --secondary: #f3efca; /* Clotted Cream */
-        --accent: #f77b4b; /* Một cam sáng hơn cho hover */
-        --highlight: #ffe5d2; /* Cam nhạt để làm nền nổi bật */
-        --contrast: #aa3e00; /* Cam đất đậm thay cho đen */
-        --text-dark: #732400; /* Nâu cam đậm, không phải đen */
-        --text-light: #ffffff;
+        --primary: #1261a6; /* Xanh đậm - màu chủ đạo */
+        --secondary: #d5e7f2; /* Xanh nhạt - làm nền */
+        --accent: #126da6; /* Xanh vừa - hover */
+        --highlight: #73c6d9; /* Xanh lơ nhạt - nền nổi bật */
+        --contrast: #2a95bf; /* Xanh sáng để thay cho màu nổi bật khác */
+        --text-dark: #0d3b66; /* Xanh rất đậm để thay thế màu chữ đậm (tự tạo thêm để phù hợp) */
+        --text-light: #ffffff; /* Giữ nguyên màu trắng để dễ đọc trên nền xanh */
 
-        --day1: #f3efca;
-        --day1-text: #8b4d00;
-        --day2: #fff0e5;
-        --day2-text: #c2461a;
-        --day3: #ffe9dc;
-        --day3-text: #a83200;
+        --day1: #d5e7f2; /* Nền ngày 1 */
+        --day1-text: #1261a6; /* Chữ ngày 1 - xanh đậm */
+        --day2: #73c6d9; /* Nền ngày 2 */
+        --day2-text: #0d3b66; /* Chữ ngày 2 - xanh navy đậm */
+        --day3: #2a95bf; /* Nền ngày 3 */
+        --day3-text: #083d58; /* Chữ ngày 3 - tự tạo xanh đen đậm */
       }
 
       * {
@@ -148,9 +148,76 @@
         font-size: 22px;
         margin-bottom: 40px;
         margin-top: -10px;
-        color: var(--primary);
+        color: var(--contrast);
         text-shadow: 2px 2px 1px var(--secondary);
       }
+
+      /* Dropdown Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  display: inline-block;
+  padding: 0.5em 0em;
+  text-decoration: none;
+  color: var(--text-light);
+  background-color: var(--primary);
+  border-radius: 1.5em;
+  transition: background 0.3s ease;
+  text-align: center;
+  min-width: 140px; /* Cố định chiều rộng cho nút chính */
+}
+
+.dropdown-toggle:hover {
+  background-color: var(--day1);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 58%;
+  margin-top: 10px;
+  transform: translateX(-50%);
+  background-color: var(--secondary);
+  padding: 0.5em 0;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 200px; /* hoặc bằng với nút chính nếu bạn dùng */
+  text-align: center; /* căn giữa nội dung bên trong */
+  margin-top: px;
+}
+
+.dropdown-menu {
+  display: none;
+  /* ...các style cũ... */
+}
+
+.dropdown-menu.active {
+  display: block;
+}
+
+
+.dropdown-item {
+  display: inline-block; /* để chiều rộng tự nhiên và có thể căn giữa */
+  padding: 0.5em 1.5em;
+  margin: 6px 0;
+  color: var(--text-light);
+  background-color: var(--primary);
+  border-radius: 1.5em;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--day1);
+}
+
+
+
 
       .btn {
         display: inline-block;
@@ -213,7 +280,7 @@
       }
 
       #videos.highlight-vid h2 {
-        color: var(--day3-text);
+        color: var(--day1);
       }
       .gallery img:hover {
         transform: scale(1.05);
@@ -254,13 +321,13 @@
       }
 
       .timeline-day:nth-child(3) {
-        background: var(--day2);
-        color: var(--day2-text);
+        background: var(--day2-text);
+        color: var(--day1);
         animation-delay: 0.4s;
       }
 
       .timeline-day:nth-child(3) i {
-        color: var(--day2-text);
+        color: var(--day1);
       }
 
       .timeline-day:nth-child(4) {
@@ -375,6 +442,10 @@
       .video-gallery {
         flex-wrap: wrap;
         gap: 32px;
+      }
+
+       .video-gallery h3{
+        color: var(--secondary);
       }
 
       .video-gallery video {
@@ -523,11 +594,11 @@
     <header>
       <div class="logo">
         <img
-          src="img/843e7611d60662583b17.png"
+          src="img/LOGO SM 2024_tách nền.png"
           class="logo"
           alt="SIKHEM Logo"
         />
-        <h1>SIKHEM I</h1>
+        <h1>Sa mạc 2024 - Cùng Mẹ lên đường</h1>
       </div>
       <nav>
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -541,6 +612,13 @@
           <a href="#">Giới thiệu</a>
           <a href="#gallery">Hình ảnh</a>
           <a href="#timeline">Lịch trình</a>
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">Các Sa mạc</a>
+            <div class="dropdown-menu" id="submenu">
+              <a href="cungmelenduong.html" class="dropdown-item" target="_blank">Sa mạc 2024</a>
+              <a href="index.html" class="dropdown-item">Sa mạc 2025</a>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
@@ -548,8 +626,8 @@
     <section class="hero">
       <img src="img/IMG_6186.JPG" class="hero-bg" alt="Hero Background" />
       <div class="hero-content">
-        <h1>SIKHEM I</h1>
-        <p><b>Tiếp bước hy vọng.</b></p>
+        <h1>Sa mạc 2024</h1>
+        <p><b>Cùng Mẹ lên đường.</b></p>
         <a
           href="https://drive.google.com/drive/folders/1TQEp9b9eVnS8AhAVyPlfSOhOufjDVjrU?usp=sharing"
           class="btn"
@@ -562,7 +640,7 @@
           target="_blank"
           >📷 Hình ảnh Ngày 2</a
         >
-        <a href="#" class="btn">📷 Hình ảnh Ngày 3</a>
+        <a href="#" class="btn">📷 Video xịn sò</a>
       </div>
     </section>
 
@@ -901,7 +979,7 @@
     <footer>
       &copy;
       <b
-        >2025 SIKHEM I - THIẾT KẾ VÀ PHÁT TRIỂN BỞI BAN TRUYỀN THÔNG XỨ ĐOÀN.</b
+        >2024 CÙNG MẸ LÊN ĐƯỜNG - THIẾT KẾ VÀ PHÁT TRIỂN BỞI BAN TRUYỀN THÔNG XỨ ĐOÀN.</b
       >
     </footer>
     <div id="lightbox-overlay">
@@ -947,6 +1025,22 @@
       lightboxOverlay.addEventListener("click", () => {
         lightboxOverlay.style.display = "none";
       });
+
+      function toggleDropdown(event) {
+    event.preventDefault(); // ngăn điều hướng nếu cần
+    const menu = document.getElementById("submenu");
+    menu.classList.toggle("active");
+  }
+
+  // Ẩn dropdown khi bấm ra ngoài
+  window.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.dropdown');
+    const menu = document.getElementById("submenu");
+
+    if (!dropdown.contains(e.target)) {
+      menu.classList.remove('active');
+    }
+  });
     </script>
   </body>
 </html>
