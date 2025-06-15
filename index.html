@@ -331,6 +331,72 @@
           height: auto;
         }
       }
+     /* Dropdown Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  display: inline-block;
+  padding: 0.5em 0em;
+  text-decoration: none;
+  color: var(--secondary);
+  background-color: var(--primary);
+  border-radius: 1.5em;
+  transition: background 0.3s ease;
+  text-align: center;
+  min-width: 140px; /* Cố định chiều rộng cho nút chính */
+}
+
+.dropdown-toggle:hover {
+  background-color: var(--day1);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 58%;
+  margin-top: 10px;
+  transform: translateX(-50%);
+  background-color: var(--secondary);
+  padding: 0.5em 0;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 200px; /* hoặc bằng với nút chính nếu bạn dùng */
+  text-align: center; /* căn giữa nội dung bên trong */
+  margin-top: px;
+}
+
+.dropdown-menu {
+  display: none;
+  /* ...các style cũ... */
+}
+
+.dropdown-menu.active {
+  display: block;
+}
+
+
+.dropdown-item {
+  display: inline-block; /* để chiều rộng tự nhiên và có thể căn giữa */
+  padding: 0.5em 1.5em;
+  margin: 6px 0;
+  color: var(--secondary);
+  background-color: var(--primary);
+  border-radius: 1.5em;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--day1);
+}
+
+
+
 
       /* ✅ Không thay đổi layout các phần khác */
       /* Không chỉnh .hero, .hero-content, .btn, ... */
@@ -541,11 +607,12 @@
           <a href="#">Giới thiệu</a>
           <a href="#gallery">Hình ảnh</a>
           <a href="#timeline">Lịch trình</a>
-          <a
-            href="cungmelenduong.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Các Sa mạc</a>
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">Các Sa mạc</a>
+            <div class="dropdown-menu" id="submenu">
+              <a href="cungmelenduong.html" class="dropdown-item" target="_blank">Sa mạc 2024</a>
+              <a href="index.html" class="dropdown-item">Sa mạc 2025</a>
+            </div>
         </div>
       </nav>
     </header>
@@ -952,6 +1019,22 @@
       lightboxOverlay.addEventListener("click", () => {
         lightboxOverlay.style.display = "none";
       });
+
+            function toggleDropdown(event) {
+    event.preventDefault(); // ngăn điều hướng nếu cần
+    const menu = document.getElementById("submenu");
+    menu.classList.toggle("active");
+  }
+
+  // Ẩn dropdown khi bấm ra ngoài
+  window.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.dropdown');
+    const menu = document.getElementById("submenu");
+
+    if (!dropdown.contains(e.target)) {
+      menu.classList.remove('active');
+    }
+  });
     </script>
   </body>
 </html>
