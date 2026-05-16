@@ -163,6 +163,7 @@
   cursor: pointer;
   margin-top: 10px;
   transition: 0.3s;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 .btn-download:hover { background: #1b5e20; }
 
@@ -195,10 +196,16 @@
 .canvas-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 1; 
+  overflow: hidden; /* Quan trọng: Cắt phần ảnh nền thừa khi zoom to */
+  background: #c5e1a5; /* Nền xanh nhạt dự phòng nếu ảnh load chậm */
   z-index: 0;
+}
+
+/* Đảm bảo ảnh nền luôn bao phủ tối thiểu toàn bộ khung ban đầu */
+#bg-img {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover; 
 }
 
 .slide-divider {
@@ -406,3 +413,154 @@
 #scrapbook-canvas.layout-vertical .polaroid-card.pos-modern { bottom: 60px; right: 40px; }
 #scrapbook-canvas.layout-vertical .decor-title { bottom: 40px; left: 40px; font-size: 46px; }
 #scrapbook-canvas.layout-vertical .torn-words-container { top: 20px; left: 40px; }
+
+/* --- KHO CHỌN STICKER --- */
+.icon-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 160px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fdfdfd;
+}
+
+/* Tùy chỉnh thanh cuộn cho đẹp */
+.icon-picker::-webkit-scrollbar { width: 6px; }
+.icon-picker::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-btn:hover {
+  background: #4ab362;
+  color: #fff;
+  border-color: #4ab362;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 179, 98, 0.3);
+}
+
+/* STICKER ĐỘNG TRÊN CANVAS */
+.dynamic-sticker {
+  position: absolute;
+  font-size: 40px; /* Kích thước mặc định của sticker */
+  cursor: grab;
+  z-index: 50;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+  transition: transform 0.2s;
+}
+.dynamic-sticker:active {
+  cursor: grabbing;
+  transform: scale(1.1); /* Phóng to nhẹ khi đang cầm kéo */
+}
+
+/* --- KHUNG CHỌN STICKER KIỂU FB/INSTA --- */
+.sticker-wrapper {
+  position: absolute;
+  display: inline-block;
+  cursor: grab;
+  z-index: 50;
+  padding: 10px; /* Khoảng cách từ icon ra viền */
+  border: 1.5px dashed transparent; /* Mặc định ẩn viền */
+  transform-origin: center;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+/* Khi được click (Active) */
+.sticker-wrapper.active {
+  border-color: #4ab362;
+  background: rgba(255, 255, 255, 0.15);
+}
+.sticker-wrapper:active {
+  cursor: grabbing;
+}
+
+.sticker-icon {
+  font-size: 40px; /* Size mặc định */
+  line-height: 1;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+  pointer-events: none; /* Tránh cấn chuột khi kéo thả */
+}
+
+/* Nút Xóa (Góc trên trái) */
+.sticker-delete {
+  position: absolute;
+  top: -12px; left: -12px;
+  width: 24px; height: 24px;
+  background: #ff5f56;
+  color: white;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Nút Thu Phóng (Góc dưới phải) */
+.sticker-resize {
+  position: absolute;
+  bottom: -12px; right: -12px;
+  width: 24px; height: 24px;
+  background: #fff;
+  border: 2.5px solid #4ab362;
+  border-radius: 50%;
+  display: none;
+  cursor: nwse-resize; /* Trỏ chuột hình chéo */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Chỉ hiện nút điều khiển khi sticker đang được Active */
+.sticker-wrapper.active .sticker-delete,
+.sticker-wrapper.active .sticker-resize {
+  display: flex;
+}
+
+/* --- BỘ CHỌN MÀU STICKER --- */
+.sticker-color-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.sticker-color-picker label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+  margin: 0 !important; 
+  text-transform: none !important;
+}
+
+.sticker-color-picker input[type="color"] {
+  width: 36px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fff;
+  transition: 0.2s;
+}
+
+.sticker-color-picker input[type="color"]:hover {
+  border-color: #4ab362;
+}
