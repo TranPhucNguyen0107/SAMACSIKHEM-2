@@ -49,247 +49,175 @@
 
   <div class="scrapbook-container">
     <aside class="editor-panel">
+      <!-- DRAG HANDLE (mobile only, shown via CSS) -->
       <div class="mobile-drag-handle" onclick="toggleEditor()">
         <div class="handle-bar"></div>
-        <span class="handle-text" id="handle-title">CÔNG CỤ THIẾT KẾ (Nhấn để mở)</span>
+        <span class="handle-text" id="handle-title">CÔNG CỤ THIẾT KẾ • Nhấn để mở</span>
       </div>
+
+      <!-- TAB BAR (mobile only, shown via CSS) -->
+      <div class="panel-tabs">
+        <button class="panel-tab" data-tab="layout">📐 Bố cục</button>
+        <button class="panel-tab" data-tab="photos">🖼️ Ảnh</button>
+        <button class="panel-tab" data-tab="stickers">✨ Sticker</button>
+        <button class="panel-tab" data-tab="text">✍️ Chữ</button>
+        <button class="panel-tab" data-tab="export">⬇️ Xuất</button>
+      </div>
+
       <div class="panel-header">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
         <h2>Thiết kế Feed Kỷ Niệm</h2>
         <p>Tùy chỉnh linh hoạt bố cục, ảnh nền và các chi tiết phụ kiện trang trí theo ý muốn.</p>
       </div>
 
-      <div class="control-group">
-        <label>Bố cục Scrapbook</label>
-        <div class="layout-switch">
-          <button type="button" class="btn-layout active" onclick="setLayout('horizontal', this)">NGANG (H)</button>
-          <button type="button" class="btn-layout" onclick="setLayout('vertical', this)">DỌC (V)</button>
-        </div>
-      </div>
+      <div class="panel-scrollable">
 
-      <div class="control-group">
-        <label>Ảnh nền phía sau</label>
-        <div class="upload-item" style="padding: 0; border: none; background: transparent; margin-bottom: 0;">
-          <label class="file-label bg-upload-btn" style="margin-bottom: 10px;">
-            <i class="fa-solid fa-images"></i>
-            <span>Thay đổi ảnh nền chính</span>
-            <input type="file" accept="image/*" onchange="handleBgUpload(event)" />
-          </label>
-          <div class="zoom-control">
-            <i class="fa-solid fa-magnifying-glass-minus"></i>
-            <input type="range" id="bg-zoom-slider" min="50" max="300" value="100"
-              oninput="zoomImage('bg-img', this.value)">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>
+        <!-- BỐ CỤC -->
+        <div class="tab-section" id="tab-layout">
+          <div class="control-group">
+            <label>Bố cục Scrapbook</label>
+            <div class="layout-switch">
+              <button type="button" class="btn-layout active" onclick="setLayout('horizontal', this)">⬛ NGANG</button>
+              <button type="button" class="btn-layout" onclick="setLayout('vertical', this)">⬜ DỌC</button>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label>Tiêu đề chính</label>
-        <input type="text" id="input-title" value="GO PRO FOR LIFE" oninput="updateText()" />
-      </div>
-
-      <div class="control-group">
-        <label>Lời nhắn nhủ (viết tay)</label>
-        <textarea id="input-sub" oninput="updateText()"
-          rows="3">Tuổi trẻ này mình cùng nhau Đồng hành trên sa mạc Sikhem2</textarea>
-      </div>
-
-      <div class="control-group">
-        <label>Kho Sticker (Nhấn để thêm, Nháy đúp để xóa)</label>
-
-        <div class="sticker-color-picker">
-          <label for="sticker-color">Màu Sticker:</label>
-          <input type="color" id="sticker-color" value="#ffbd2e" title="Chọn màu cho Sticker" />
-        </div>
-
-        <div class="icon-picker">
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-heart')" title="Trái tim"><i
-              class="fa-solid fa-heart"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-star')" title="Ngôi sao"><i
-              class="fa-solid fa-star"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-leaf')" title="Chiếc lá"><i
-              class="fa-solid fa-leaf"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-crown')" title="Vương miện"><i
-              class="fa-solid fa-crown"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-music')" title="Âm nhạc"><i
-              class="fa-solid fa-music"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-camera')" title="Máy ảnh"><i
-              class="fa-solid fa-camera"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-plane')" title="Máy bay"><i
-              class="fa-solid fa-plane"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-fire')" title="Lửa"><i
-              class="fa-solid fa-fire"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-bolt')" title="Tia chớp"><i
-              class="fa-solid fa-bolt"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-paw')" title="Dấu chân"><i
-              class="fa-solid fa-paw"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-clover')" title="Cỏ 4 lá"><i
-              class="fa-solid fa-clover"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-sun')" title="Mặt trời"><i
-              class="fa-solid fa-sun"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-moon')" title="Mặt trăng"><i
-              class="fa-solid fa-moon"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-ghost')" title="Ma cute"><i
-              class="fa-solid fa-ghost"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-campground')" title="Cắm trại"><i
-              class="fa-solid fa-campground"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-regular fa-face-smile')" title="Mặt cười"><i
-              class="fa-regular fa-face-smile"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-face-grin-hearts')" title="Mắt trái tim"><i
-              class="fa-solid fa-face-grin-hearts"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-face-laugh-squint')" title="Cười tít mắt"><i
-              class="fa-solid fa-face-laugh-squint"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-face-kiss-wink-heart')" title="Hôn thả tim"><i
-              class="fa-solid fa-face-kiss-wink-heart"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-face-dizzy')" title="Hoa mắt"><i
-              class="fa-solid fa-face-dizzy"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-thumbs-up')" title="Like"><i
-              class="fa-solid fa-thumbs-up"></i></button>
-
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-heart-crack')" title="Trái tim vỡ"><i
-              class="fa-solid fa-heart-crack"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-gift')" title="Hộp quà"><i
-              class="fa-solid fa-gift"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-cake-candles')" title="Bánh sinh nhật"><i
-              class="fa-solid fa-cake-candles"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-gem')" title="Kim cương"><i
-              class="fa-solid fa-gem"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-ring')" title="Nhẫn"><i
-              class="fa-solid fa-ring"></i></button>
-
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-tree')" title="Cây xanh"><i
-              class="fa-solid fa-tree"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-seedling')" title="Mầm cây"><i
-              class="fa-solid fa-seedling"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-cloud')" title="Đám mây"><i
-              class="fa-solid fa-cloud"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-cloud-showers-heavy')" title="Mưa"><i
-              class="fa-solid fa-cloud-showers-heavy"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-snowflake')" title="Bông tuyết"><i
-              class="fa-solid fa-snowflake"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-umbrella')" title="Cái ô"><i
-              class="fa-solid fa-umbrella"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-rainbow')" title="Cầu vồng"><i
-              class="fa-solid fa-rainbow"></i></button>
-
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-cat')" title="Mèo"><i
-              class="fa-solid fa-cat"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-dog')" title="Chó"><i
-              class="fa-solid fa-dog"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-fish')" title="Cá"><i
-              class="fa-solid fa-fish"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-dove')" title="Chim bồ câu"><i
-              class="fa-solid fa-dove"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-frog')" title="Ếch"><i
-              class="fa-solid fa-frog"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-hippo')" title="Hà mã"><i
-              class="fa-solid fa-hippo"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-bug')" title="Bọ"><i
-              class="fa-solid fa-bug"></i></button>
-
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-mug-hot')" title="Cà phê nóng"><i
-              class="fa-solid fa-mug-hot"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-pizza-slice')" title="Pizza"><i
-              class="fa-solid fa-pizza-slice"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-burger')" title="Burger"><i
-              class="fa-solid fa-burger"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-ice-cream')" title="Kem"><i
-              class="fa-solid fa-ice-cream"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-apple-whole')" title="Quả táo"><i
-              class="fa-solid fa-apple-whole"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-cookie')" title="Bánh quy"><i
-              class="fa-solid fa-cookie"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-martini-glass-citrus')" title="Cocktail"><i
-              class="fa-solid fa-martini-glass-citrus"></i></button>
-
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-car')" title="Ô tô"><i
-              class="fa-solid fa-car"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-bicycle')" title="Xe đạp"><i
-              class="fa-solid fa-bicycle"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-motorcycle')" title="Xe máy"><i
-              class="fa-solid fa-motorcycle"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-mountain-sun')" title="Núi non"><i
-              class="fa-solid fa-mountain-sun"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-anchor')" title="Mỏ neo"><i
-              class="fa-solid fa-anchor"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-map-location-dot')" title="Bản đồ"><i
-              class="fa-solid fa-map-location-dot"></i></button>
-
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-paperclip')" title="Ghim giấy"><i
-              class="fa-solid fa-paperclip"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-thumbtack')" title="Đinh ghim"><i
-              class="fa-solid fa-thumbtack"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-scissors')" title="Cái kéo"><i
-              class="fa-solid fa-scissors"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-palette')" title="Bảng màu"><i
-              class="fa-solid fa-palette"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-lightbulb')" title="Bóng đèn"><i
-              class="fa-solid fa-lightbulb"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-book')" title="Quyển sách"><i
-              class="fa-solid fa-book"></i></button>
-
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-rocket')" title="Tên lửa"><i
-              class="fa-solid fa-rocket"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-bomb')" title="Quả bom"><i
-              class="fa-solid fa-bomb"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-ghost')" title="Con ma"><i
-              class="fa-solid fa-ghost"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-yin-yang')" title="Âm dương"><i
-              class="fa-solid fa-yin-yang"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-peace')" title="Hòa bình"><i
-              class="fa-solid fa-peace"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-fire-flame-curved')" title="Lửa bùng"><i
-              class="fa-solid fa-fire-flame-curved"></i></button>
-          <button class="icon-btn" onclick="addSticker('fa-solid fa-mask')" title="Mặt nạ"><i
-              class="fa-solid fa-mask"></i></button>
-        </div>
-      </div>
-
-      <div class="upload-zone">
-        <div class="upload-item">
-          <label class="file-label">
-            <i class="fa-solid fa-camera"></i>
-            <span>Ảnh 1 (Khung Mac)</span>
-            <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-1')" />
-          </label>
-          <div class="zoom-control">
-            <i class="fa-solid fa-magnifying-glass-minus"></i>
-            <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-1', this.value)">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          <div class="control-group">
+            <label>Ảnh nền phía sau</label>
+            <div class="upload-item" style="padding:0;border:none;background:transparent;margin-bottom:0;">
+              <label class="file-label bg-upload-btn" style="margin-bottom:10px;">
+                <i class="fa-solid fa-images"></i>
+                <span>Thay đổi ảnh nền chính</span>
+                <input type="file" accept="image/*" onchange="handleBgUpload(event)" />
+              </label>
+              <div class="zoom-control">
+                <i class="fa-solid fa-magnifying-glass-minus"></i>
+                <input type="range" id="bg-zoom-slider" min="50" max="300" value="100"
+                  oninput="zoomImage('bg-img', this.value)">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="upload-item">
-          <label class="file-label">
-            <i class="fa-solid fa-image"></i>
-            <span>Ảnh 2 (Polaroid vuông)</span>
-            <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-2')" />
-          </label>
-          <div class="zoom-control">
-            <i class="fa-solid fa-magnifying-glass-minus"></i>
-            <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-2', this.value)">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>
+        <!-- ẢNH -->
+        <div class="tab-section" id="tab-photos">
+          <div class="upload-zone">
+            <div class="upload-item">
+              <label class="file-label">
+                <i class="fa-solid fa-camera"></i>
+                <span>Ảnh 1 (Khung Mac)</span>
+                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-1')" />
+              </label>
+              <div class="zoom-control">
+                <i class="fa-solid fa-magnifying-glass-minus"></i>
+                <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-1', this.value)">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
+            <div class="upload-item">
+              <label class="file-label">
+                <i class="fa-solid fa-image"></i>
+                <span>Ảnh 2 (Polaroid vuông)</span>
+                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-2')" />
+              </label>
+              <div class="zoom-control">
+                <i class="fa-solid fa-magnifying-glass-minus"></i>
+                <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-2', this.value)">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
+            <div class="upload-item">
+              <label class="file-label">
+                <i class="fa-solid fa-music"></i>
+                <span>Ảnh 3 (Music Cover)</span>
+                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-3')" />
+              </label>
+              <div class="zoom-control">
+                <i class="fa-solid fa-magnifying-glass-minus"></i>
+                <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-3', this.value)">
+                <i class="fa-solid fa-magnifying-glass-plus"></i>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="upload-item">
-          <label class="file-label">
-            <i class="fa-solid fa-music"></i>
-            <span>Ảnh 3 (Music Cover)</span>
-            <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-3')" />
-          </label>
-          <div class="zoom-control">
-            <i class="fa-solid fa-magnifying-glass-minus"></i>
-            <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-3', this.value)">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>
+        <!-- STICKER -->
+        <div class="tab-section" id="tab-stickers">
+          <div class="control-group">
+            <label>Kho Sticker — Nhấn để thêm vào canvas</label>
+            <div class="sticker-color-picker">
+              <label for="sticker-color">Màu:</label>
+              <input type="color" id="sticker-color" value="#ffbd2e" title="Chọn màu cho Sticker" />
+            </div>
+            <div class="icon-picker">
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-heart')" title="Trái tim"><i class="fa-solid fa-heart"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-star')" title="Ngôi sao"><i class="fa-solid fa-star"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-leaf')" title="Chiếc lá"><i class="fa-solid fa-leaf"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-crown')" title="Vương miện"><i class="fa-solid fa-crown"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-music')" title="Âm nhạc"><i class="fa-solid fa-music"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-camera')" title="Máy ảnh"><i class="fa-solid fa-camera"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-plane')" title="Máy bay"><i class="fa-solid fa-plane"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-fire')" title="Lửa"><i class="fa-solid fa-fire"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-bolt')" title="Tia chớp"><i class="fa-solid fa-bolt"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-paw')" title="Dấu chân"><i class="fa-solid fa-paw"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-clover')" title="Cỏ 4 lá"><i class="fa-solid fa-clover"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-sun')" title="Mặt trời"><i class="fa-solid fa-sun"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-moon')" title="Mặt trăng"><i class="fa-solid fa-moon"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-ghost')" title="Ma cute"><i class="fa-solid fa-ghost"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-campground')" title="Cắm trại"><i class="fa-solid fa-campground"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-regular fa-face-smile')" title="Mặt cười"><i class="fa-regular fa-face-smile"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-face-grin-hearts')" title="Mắt trái tim"><i class="fa-solid fa-face-grin-hearts"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-face-laugh-squint')" title="Cười tít mắt"><i class="fa-solid fa-face-laugh-squint"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-thumbs-up')" title="Like"><i class="fa-solid fa-thumbs-up"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-heart-crack')" title="Tim vỡ"><i class="fa-solid fa-heart-crack"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-gift')" title="Hộp quà"><i class="fa-solid fa-gift"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-cake-candles')" title="Bánh sinh nhật"><i class="fa-solid fa-cake-candles"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-gem')" title="Kim cương"><i class="fa-solid fa-gem"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-tree')" title="Cây xanh"><i class="fa-solid fa-tree"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-seedling')" title="Mầm cây"><i class="fa-solid fa-seedling"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-cloud')" title="Đám mây"><i class="fa-solid fa-cloud"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-snowflake')" title="Bông tuyết"><i class="fa-solid fa-snowflake"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-rainbow')" title="Cầu vồng"><i class="fa-solid fa-rainbow"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-cat')" title="Mèo"><i class="fa-solid fa-cat"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-dog')" title="Chó"><i class="fa-solid fa-dog"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-dove')" title="Bồ câu"><i class="fa-solid fa-dove"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-frog')" title="Ếch"><i class="fa-solid fa-frog"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-mug-hot')" title="Cà phê"><i class="fa-solid fa-mug-hot"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-pizza-slice')" title="Pizza"><i class="fa-solid fa-pizza-slice"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-ice-cream')" title="Kem"><i class="fa-solid fa-ice-cream"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-rocket')" title="Tên lửa"><i class="fa-solid fa-rocket"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-fire-flame-curved')" title="Lửa bùng"><i class="fa-solid fa-fire-flame-curved"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-mountain-sun')" title="Núi non"><i class="fa-solid fa-mountain-sun"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-map-location-dot')" title="Bản đồ"><i class="fa-solid fa-map-location-dot"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-thumbtack')" title="Đinh ghim"><i class="fa-solid fa-thumbtack"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-palette')" title="Bảng màu"><i class="fa-solid fa-palette"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-peace')" title="Hòa bình"><i class="fa-solid fa-peace"></i></button>
+              <button class="icon-btn" onclick="addSticker('fa-solid fa-yin-yang')" title="Âm dương"><i class="fa-solid fa-yin-yang"></i></button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <button class="btn-download" onclick="triggerDownload()">
-        <i class="fa-solid fa-download"></i> XUẤT FILE ẢNH TỐI ĐA
-      </button>
+        <!-- CHỮ -->
+        <div class="tab-section" id="tab-text">
+          <div class="control-group">
+            <label>Tiêu đề chính</label>
+            <input type="text" id="input-title" value="GO PRO FOR LIFE" oninput="updateText()" />
+          </div>
+          <div class="control-group">
+            <label>Lời nhắn nhủ (viết tay)</label>
+            <textarea id="input-sub" oninput="updateText()" rows="4">Tuổi trẻ này mình cùng nhau Đồng hành trên sa mạc Sikhem2</textarea>
+          </div>
+        </div>
+
+        <!-- XUẤT ẢNH -->
+        <div class="tab-section" id="tab-export">
+          <p style="font-size:13px;color:#666;margin:0 0 16px;line-height:1.6;">Tất cả sticker và chỉnh sửa sẽ được ghi vào ảnh. Ảnh xuất có độ phân giải cao (2×).</p>
+          <button class="btn-download" onclick="triggerDownload()">
+            <i class="fa-solid fa-download"></i> XUẤT FILE ẢNH CHẤT LƯỢNG CAO
+          </button>
+        </div>
+
+      </div><!-- end panel-scrollable -->
     </aside>
 
     <div class="canvas-zone">
