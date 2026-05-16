@@ -67,11 +67,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255,255,255,0.12);
+  background: color-mix(in srgb, var(--secondary) 94%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
 }
 
 .logo {
@@ -422,10 +422,11 @@ nav a:hover {
 }
 
 .link-card h3 {
-  font-family: "iCiel Brush Up", cursive;
-  font-size: 26px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
   color: var(--primary);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.2px;
   transition: color 0.3s;
 }
 
@@ -626,10 +627,7 @@ footer b {
   }
 
   .logo h1 {
-    font-size: 16px;
-    max-width: 160px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: none;
   }
 
   .menu-toggle {
@@ -664,15 +662,23 @@ footer b {
 
   .hero-content {
     padding: 0 24px;
+    text-align: center;
+    max-width: 100%;
   }
 
   .hero-content h1 {
-    font-size: clamp(52px, 14vw, 80px);
+    font-size: clamp(48px, 13vw, 80px);
   }
 
   .hero-content p {
     font-size: 20px;
-    margin-bottom: 32px; 
+    margin-bottom: 28px;
+  }
+
+  .hero-content .btn {
+    display: block;
+    margin: 0 0 10px 0;
+    text-align: center;
   }
 
   .btn {
@@ -890,12 +896,60 @@ footer b {
 @media (max-width: 768px) {
   .map-card-container {
     flex-direction: column;
+    border-radius: 16px;
   }
   .map-embed {
-    min-height: 250px;
+    min-height: 220px;
+  }
+  .map-embed iframe {
+    width: 100%;
+    height: 220px;
   }
   .route-stats {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .map-info {
+    padding: 24px 20px;
+  }
+}
+
+/* ===================== FOOTER MOBILE ===================== */
+@media (max-width: 768px) {
+  footer {
+    padding: 28px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* ===================== SECTION PADDING MOBILE ===================== */
+@media (max-width: 480px) {
+  .section,
+  .video-links-section,
+  .timeline {
+    padding: 48px 16px;
+  }
+
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-track img {
+    height: 200px;
+  }
+
+  .timeline-day {
+    padding: 22px 18px;
+  }
+
+  .timeline-day li {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 10px 18px;
   }
 }
