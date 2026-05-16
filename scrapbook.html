@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrapbook Kỷ Niệm – SIKHEM II</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Caveat:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Caveat:wght@400;700&family=Sriracha&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/samac2026.css" />
+  <link rel="stylesheet" href="css/scrapbook.css" />
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body class="loading scrapbook-page">
+  <div id="preloader">
+    <div class="loader">⏳ Đang chuẩn bị không gian sáng tạo...</div>
+  </div>
+
+  <header>
+    <div class="logo">
+      <img src="img/843e7611d60662583b17.png" alt="SIKHEM Logo" />
+      <h1>SIKHEM II - Scrapbook</h1>
+    </div>
+    <nav>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <div class="nav-links">
+        <a href="index.html">Trang chủ</a>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">Các Sa mạc</a>
+          <div class="dropdown-menu" id="submenu">
+            <a href="taisinhtrongthanhthan.html" class="dropdown-item">Sa mạc 2023</a>
+            <a href="cungmelenduong.html" class="dropdown-item">Sa mạc 2024</a>
+            <a href="index.html" class="dropdown-item">Sa mạc 2025</a>
+            <a href="sikhem2.html" class="dropdown-item">Sa mạc 2026</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="scrapbook-container">
+    <aside class="editor-panel">
+      <div class="panel-header">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <h2>Thiết kế Feed Kỷ Niệm</h2>
+        <p>Tùy chỉnh linh hoạt bố cục, ảnh nền và các chi tiết phụ kiện trang trí theo ý muốn.</p>
+      </div>
+
+      <div class="control-group">
+        <label>Bố cục Scrapbook</label>
+        <div class="layout-switch">
+          <button type="button" class="btn-layout active" onclick="setLayout('horizontal', this)">NGANG (H)</button>
+          <button type="button" class="btn-layout" onclick="setLayout('vertical', this)">DỌC (V)</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Ảnh nền phía sau</label>
+        <label class="file-label bg-upload-btn">
+          <i class="fa-solid fa-images"></i>
+          <span>Thay đổi ảnh nền chính</span>
+          <input type="file" accept="image/*" onchange="handleBgUpload(event)" />
+        </label>
+      </div>
+
+      <div class="control-group">
+        <label>Tiêu đề chính</label>
+        <input type="text" id="input-title" value="TUNE IN FOR LOVE" oninput="updateText()" />
+      </div>
+
+      <div class="control-group">
+        <label>Lời nhắn nhủ (viết tay)</label>
+        <textarea id="input-sub" oninput="updateText()" rows="3">Tuổi trẻ này mình cùng nhau\nDấn bước trên sa mạc\nSIKHEM II</textarea>
+      </div>
+
+      <div class="control-group">
+        <label>Thêm trang trí (Nhấn để bật/tắt)</label>
+        <div class="decor-selector">
+          <div class="decor-option" onclick="toggleDecor('decor-flower', this)">
+            <i class="fa-solid fa-leaf"></i><span>KHUNG HOA</span>
+          </div>
+          <div class="decor-option" onclick="toggleDecor('decor-ribbon', this)">
+            <i class="fa-solid fa-ribbon"></i><span>NƠ RUY BĂNG</span>
+          </div>
+          <div class="decor-option" onclick="toggleDecor('decor-owl', this)">
+            <i class="fa-solid fa-kiwi-bird"></i><span>CÚ HOẠT HÌNH</span>
+          </div>
+          <div class="decor-option" onclick="toggleDecor('decor-pearl', this)">
+            <i class="fa-solid fa-ellipsis"></i><span>HẠT TRAI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="upload-zone">
+        <div class="upload-item">
+          <label class="file-label">
+            <i class="fa-solid fa-camera"></i>
+            <span>Ảnh 1 (Khung Mac)</span>
+            <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-1')" />
+          </label>
+          <div class="zoom-control">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+            <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-1', this.value)">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+        <div class="upload-item">
+          <label class="file-label">
+            <i class="fa-solid fa-image"></i>
+            <span>Ảnh 2 (Polaroid vuông)</span>
+            <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-2')" />
+          </label>
+          <div class="zoom-control">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+            <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-2', this.value)">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+
+        <div class="upload-item">
+          <label class="file-label">
+            <i class="fa-solid fa-music"></i>
+            <span>Ảnh 3 (Music Cover)</span>
+            <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-3')" />
+          </label>
+          <div class="zoom-control">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+            <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-3', this.value)">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-download" onclick="triggerDownload()">
+        <i class="fa-solid fa-download"></i> XUẤT FILE ẢNH TỐI ĐA
+      </button>
+    </aside>
+
+    <div class="canvas-zone">
+      <div id="scrapbook-canvas" class="layout-horizontal">
+        
+        <div class="canvas-bg" style="background-image: url('img/IMG_5953.JPG');"></div>
+        
+        <div class="slide-divider"></div>
+
+        <div class="torn-words-container">
+          <span class="torn-word" style="transform: rotate(-3deg);">SOULS</span>
+          <span class="torn-word" style="transform: rotate(2deg);">DON'T</span>
+          <span class="torn-word" style="transform: rotate(-1deg);">MEET</span><br>
+          <span class="torn-word" style="transform: rotate(4deg);">BY</span>
+          <span class="torn-word" style="transform: rotate(-2deg);">ACCIDENT</span>
+        </div>
+
+        <div class="decor-title" id="canvas-title">Những cánh hoa file tàn</div>
+
+        <div class="decor-movable decor-flower" style="display: none;">
+          <div class="flower-garland"><i class="fa-solid fa-leaf"></i>🌸🌼🌿</div>
+        </div>
+        
+        <div class="decor-movable decor-ribbon" style="display: none;">
+          <div class="ribbon-bow">🎀</div>
+        </div>
+
+        <div class="decor-movable decor-owl" style="display: none;">
+          <div class="owl-sticker">🦉</div>
+        </div>
+
+        <div class="decor-movable decor-pearl" style="display: none;">
+          <div class="pearl-string">•••••••••••••🔮</div>
+        </div>
+
+        <div class="music-widget decor-movable">
+          <div class="music-cover">
+            <div class="img-crop-window">
+              <img id="target-img-3" src="https://via.placeholder.com/200x200?text=Album+Cover" class="draggable-img" alt="" crossorigin="anonymous" />
+            </div>
+          </div>
+          <div class="music-info">
+            <h4>SIKHEM II Playlist</h4>
+            <p>Vinh Sơn Nghĩa Hòa</p>
+          </div>
+          <div class="music-progress">
+            <div class="progress-bar"></div>
+            <div class="progress-time"><span>1:24</span><span>3:05</span></div>
+          </div>
+          <div class="music-controls">
+            <i class="fa-solid fa-backward-step"></i>
+            <i class="fa-solid fa-circle-play play-btn"></i>
+            <i class="fa-solid fa-forward-step"></i>
+          </div>
+        </div>
+
+        <div class="mac-window decor-movable">
+          <div class="mac-header">
+            <div class="mac-dot dot-red"></div>
+            <div class="mac-dot dot-yellow"></div>
+            <div class="mac-dot dot-green"></div>
+            <div class="mac-title">memories.jpg</div>
+          </div>
+          <div class="mac-body">
+            <div class="img-crop-window">
+              <img id="target-img-1" src="https://via.placeholder.com/600x400?text=Upload+Anh" class="draggable-img" alt="" crossorigin="anonymous" />
+            </div>
+          </div>
+          <div class="washi-tape tape-1"></div>
+        </div>
+
+        <div class="lined-paper-note decor-movable">
+          <svg class="silver-clip" viewBox="0 0 24 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12,2 L12,45 C12,50 18,50 18,45 L18,15 C18,12 14,12 14,15 L14,42 C14,44 16,44 16,42 L16,18" fill="none" stroke="#b0bec5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p id="canvas-sub">Tuổi trẻ này mình cùng nhau<br>Dấn bước trên sa mạc<br>Sikhem 2</p>
+        </div>
+
+        <div class="polaroid-card pos-modern decor-movable">
+          <div class="img-crop-window">
+            <img id="target-img-2" src="https://via.placeholder.com/400x400?text=Upload+Anh" class="draggable-img" alt="" crossorigin="anonymous" />
+          </div>
+          <p class="polaroid-caption">Lưu giữ thanh xuân ♡</p>
+          <div class="washi-tape tape-2"></div>
+        </div>
+
+        <i class="fa-solid fa-star star-cute star-1 decor-movable"></i>
+        <i class="fa-solid fa-star star-cute star-2 decor-movable"></i>
+        <i class="fa-solid fa-star star-cute star-3 decor-movable"></i>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/scrapbook.js" defer></script>
+</body>
+</html>

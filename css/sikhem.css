@@ -1,0 +1,16 @@
+      :root {
+        --primary: #f66435; /* Exotic Orange */
+        --secondary: #f3efca; /* Clotted Cream */
+        --accent: #f77b4b; /* Một cam sáng hơn cho hover */
+        --highlight: #ffe5d2; /* Cam nhạt để làm nền nổi bật */
+        --contrast: #aa3e00; /* Cam đất đậm thay cho đen */
+        --text-dark: #732400; /* Nâu cam đậm, không phải đen */
+        --text-light: #ffffff;
+
+        --day1: #f3efca;
+        --day1-text: #8b4d00;
+        --day2: #fff0e5;
+        --day2-text: #c2461a;
+        --day3: #ffe9dc;
+        --day3-text: #a83200;
+      }

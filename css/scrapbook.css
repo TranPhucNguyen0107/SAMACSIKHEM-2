@@ -1,0 +1,408 @@
+/* ==========================================================================
+   FILE: css/scrapbook.css
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Imperial+Script&display=swap');
+
+@font-face {
+  font-family: "iCiel Brush Up";
+  src: url("../fonts/iCielBrushUp.woff2") format("woff2"),
+    url("../fonts/iCielBrushUp.woff") format("woff"),
+    url("../fonts/iCiel-Brush-Up.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gladiola';
+  src: url('../fonts/Gladiola.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.scrapbook-page {
+  background: var(--secondary);
+}
+
+.scrapbook-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* --- BẢNG ĐIỀU KHIỂN --- */
+.editor-panel {
+  flex: 0 0 340px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.panel-header h2 { font-size: 20px; color: var(--primary); margin: 0 0 8px; }
+.panel-header p { font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.4; }
+
+.control-group { margin-bottom: 18px; }
+.control-group label { display: block; font-size: 11px; font-weight: 800; color: #333; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.control-group input[type="text"], .control-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Bộ chuyển bố cục Ngang / Dọc */
+.layout-switch {
+  display: flex;
+  gap: 10px;
+}
+.btn-layout {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-layout.active {
+  background: #4ab362;
+  color: #fff;
+  border-color: #4ab362;
+}
+
+/* Thay đổi ảnh nền button */
+.bg-upload-btn {
+  background: #f1f8e9 !important;
+  border: 1px dashed #4ab362 !important;
+  justify-content: center;
+  padding: 12px !important;
+}
+
+/* Bộ chọn phụ kiện trang trí bổ sung */
+.decor-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.decor-option {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+  cursor: pointer;
+  background: #fdfdfd;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.decor-option:hover {
+  border-color: #4ab362;
+  background: #f1f8e9;
+}
+.decor-option.active {
+  border-color: #4ab362;
+  background: #e8f5e9;
+  box-shadow: inset 0 0 4px rgba(74,179,98,0.2);
+}
+.decor-option i { font-size: 16px; color: #555; }
+.decor-option.active i { color: #4ab362; }
+.decor-option span { font-size: 10px; color: #444; font-weight: 700; }
+
+.upload-item {
+  background: #f8f9fa;
+  border: 1px dashed #bbb;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.file-label input { display: none; }
+
+.zoom-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+}
+.zoom-control input[type="range"] { flex: 1; accent-color: var(--primary); }
+
+.btn-download {
+  width: 100%;
+  padding: 14px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+.btn-download:hover { background: #1b5e20; }
+
+/* --- CANVAS CHÍNH --- */
+.canvas-zone {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+#scrapbook-canvas {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+/* ĐỊNH DẠNG HÌNH HỌC THEO BỐ CỤC */
+#scrapbook-canvas.layout-horizontal {
+  width: 1000px;
+  height: 562px;
+}
+#scrapbook-canvas.layout-vertical {
+  width: 680px;
+  height: 880px;
+}
+
+.canvas-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 1; 
+  z-index: 0;
+}
+
+.slide-divider {
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: rgba(255,255,255,0.4);
+  z-index: 1;
+  border-left: 1px dashed rgba(0,0,0,0.15);
+}
+
+/* Các cấu thành có khả năng kéo thả tự do */
+.decor-movable {
+  position: absolute;
+  cursor: grab;
+}
+.decor-movable:active { cursor: grabbing; }
+
+.img-crop-window {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #eee;
+}
+
+.draggable-img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: auto;
+  cursor: grab; transform-origin: top left;
+}
+
+/* CHỮ CẮT BÁO (TORN WORDS) */
+.torn-words-container {
+  position: absolute;
+  top: 30px; left: 30px;
+  z-index: 10;
+  line-height: 1.8;
+}
+.torn-word {
+  background: #f4ecd8;
+  color: #2c2c2c;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 4px 8px;
+  margin: 0 2px;
+  border-radius: 2px;
+  display: inline-block;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  letter-spacing: 1px;
+}
+
+/* TIÊU ĐỀ */
+.decor-title {
+  position: absolute;
+  bottom: 30px; left: 50px;
+  font-family: 'iCiel Brush Up', cursive;
+  font-size: 56px;
+  color: #fff;
+  text-shadow: 2px 2px 0px #424242, 3px 3px 8px rgba(0,0,0,0.4);
+  transform: rotate(-4deg);
+  z-index: 15;
+}
+
+/* MUSIC WIDGET SPOTIFY STYLE */
+.music-widget {
+  top: 100px; left: 50px;
+  width: 180px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  z-index: 8;
+  transform: rotate(-2deg);
+}
+.music-cover {
+  width: 100%; aspect-ratio: 1;
+  border-radius: 8px; overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.music-info h4 { margin: 0; font-size: 13px; color: #333; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.music-info p { margin: 2px 0 10px; font-size: 10px; color: #777; }
+.progress-bar { height: 4px; background: #e0e0e0; border-radius: 2px; position: relative; margin-bottom: 4px; }
+.progress-bar::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 45%; background: #2e7d32; border-radius: 2px; }
+.progress-time { display: flex; justify-content: space-between; font-size: 9px; color: #888; font-family: monospace; margin-bottom: 8px; }
+.music-controls { display: flex; justify-content: center; align-items: center; gap: 16px; color: #444; font-size: 14px; }
+.music-controls .play-btn { font-size: 26px; color: #2e7d32; }
+
+/* MAC OS WINDOW */
+.mac-window {
+  top: 140px; left: 260px;
+  width: 320px; height: 230px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  border: 1px solid #e0e0e0;
+  display: flex; flex-direction: column;
+  z-index: 7;
+  transform: rotate(3deg);
+}
+.mac-header {
+  height: 24px; background: #f0f0f0;
+  border-radius: 8px 8px 0 0;
+  display: flex; align-items: center;
+  padding: 0 10px; gap: 6px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.mac-dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
+.mac-title { margin-left: auto; margin-right: auto; font-size: 10px; color: #888; font-weight: 600; padding-right: 40px; }
+.mac-body { flex: 1; padding: 8px; }
+.mac-body .img-crop-window { border-radius: 4px; }
+
+/* GIẤY NOTE KẺ NGANG */
+.lined-paper-note {
+  top: 40px; right: 100px;
+  width: 260px; min-height: 140px;
+  background-color: #fffdf2;
+  background-image: repeating-linear-gradient(transparent, transparent 27px, #90caf9 27px, #90caf9 28px);
+  padding: 35px 20px 20px 25px;
+  box-shadow: 2px 6px 15px rgba(0,0,0,0.12);
+  transform: rotate(2deg);
+  z-index: 6;
+}
+.lined-paper-note::before {
+  content: ''; position: absolute;
+  top: 0; bottom: 0; left: 20px; width: 2px;
+  background: #ef9a9a; opacity: 0.7;
+}
+.lined-paper-note p {
+  font-family: 'Imperial Script', 'Caveat', cursive;
+  font-size: 26px; color: #1a1a1a;
+  line-height: 28px;
+  margin: 0; position: relative; z-index: 2;
+}
+.silver-clip {
+  position: absolute;
+  top: -25px; left: 50%;
+  transform: translateX(-50%) rotate(-5deg);
+  width: 24px; height: 60px;
+  z-index: 10;
+  filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.3));
+}
+
+/* KHUNG POLAROID */
+.polaroid-card {
+  background: #fff;
+  padding: 12px 12px 45px 12px;
+  box-shadow: 2px 8px 25px rgba(0,0,0,0.2);
+}
+.pos-modern {
+  width: 240px; height: 280px;
+  bottom: 40px; right: 140px;
+  transform: rotate(-6deg);
+  z-index: 9;
+}
+.polaroid-caption {
+  font-family: 'iCiel Brush Up', cursive;
+  text-align: center; font-size: 20px;
+  margin: 15px 0 0; color: #333; font-weight: 700;
+}
+
+/* WASHI TAPE TRONG SUỐT */
+.washi-tape {
+  position: absolute;
+  height: 30px;
+  background: rgba(225, 245, 254, 0.6);
+  backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(255,255,255,0.5);
+  border-right: 2px dashed rgba(255,255,255,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  z-index: 20;
+}
+.tape-1 { width: 90px; top: -10px; left: -20px; transform: rotate(-45deg); background: rgba(255, 236, 179, 0.6); }
+.tape-2 { width: 100px; top: -12px; left: 50%; transform: translateX(-50%) rotate(4deg); }
+
+/* STICKER NGÔI SAO */
+.star-cute {
+  color: #ffca28;
+  filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.2));
+  z-index: 12;
+}
+.star-1 { top: 120px; left: 230px; font-size: 32px; transform: rotate(-15deg); }
+.star-2 { bottom: 80px; right: 380px; font-size: 44px; transform: rotate(20deg); }
+.star-3 { top: 30px; right: 60px; font-size: 24px; transform: rotate(45deg); }
+
+/* --- ĐỊNH DẠNG CHI TIẾT CÁC PHỤ KIỆN TRANG TRÍ MỚI --- */
+.decor-flower { top: 50px; left: 450px; font-size: 24px; z-index: 14; }
+.decor-ribbon { top: 320px; left: 120px; font-size: 40px; z-index: 14; }
+.decor-owl { bottom: 60px; right: 400px; font-size: 45px; z-index: 14; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15)); }
+.decor-pearl { top: 220px; left: 30px; font-size: 18px; z-index: 13; color: rgba(255,255,255,0.85); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+
+/* TỰ ĐỘNG SẮP XẾP LẠI KHI CHUYỂN QUA BỐ CỤC DỌC (VERTICAL) */
+#scrapbook-canvas.layout-vertical .slide-divider {
+  top: 50%; bottom: auto; left: 0; right: 0;
+  width: 100%; height: 1px;
+  border-left: none; border-top: 1px dashed rgba(0,0,0,0.15);
+}
+#scrapbook-canvas.layout-vertical .mac-window { top: 40px; left: 40px; }
+#scrapbook-canvas.layout-vertical .music-widget { top: 300px; left: 40px; }
+#scrapbook-canvas.layout-vertical .lined-paper-note { top: 40px; right: 40px; }
+#scrapbook-canvas.layout-vertical .polaroid-card.pos-modern { bottom: 60px; right: 40px; }
+#scrapbook-canvas.layout-vertical .decor-title { bottom: 40px; left: 40px; font-size: 46px; }
+#scrapbook-canvas.layout-vertical .torn-words-container { top: 20px; left: 40px; }

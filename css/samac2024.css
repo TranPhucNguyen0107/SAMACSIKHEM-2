@@ -1,0 +1,17 @@
+
+      :root {
+        --primary: #1261a6; /* Xanh đậm - màu chủ đạo */
+        --secondary: #d5e7f2; /* Xanh nhạt - làm nền */
+        --accent: #126da6; /* Xanh vừa - hover */
+        --highlight: #73c6d9; /* Xanh lơ nhạt - nền nổi bật */
+        --contrast: #2a95bf; /* Xanh sáng để thay cho màu nổi bật khác */
+        --text-dark: #0d3b66; /* Xanh rất đậm để thay thế màu chữ đậm (tự tạo thêm để phù hợp) */
+        --text-light: #ffffff; /* Giữ nguyên màu trắng để dễ đọc trên nền xanh */
+
+        --day1: #d5e7f2; /* Nền ngày 1 */
+        --day1-text: #1261a6; /* Chữ ngày 1 - xanh đậm */
+        --day2: #73c6d9; /* Nền ngày 2 */
+        --day2-text: #0d3b66; /* Chữ ngày 2 - xanh navy đậm */
+        --day3: #2a95bf; /* Nền ngày 3 */
+        --day3-text: #083d58; /* Chữ ngày 3 - tự tạo xanh đen đậm */
+      }

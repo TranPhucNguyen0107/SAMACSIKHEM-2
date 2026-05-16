@@ -1,0 +1,16 @@
+:root {
+  --primary: #E27428;      /* Cam đất – màu chủ đạo */
+  --secondary: #FDE6B1;    /* Vàng nhạt – nền chính */
+  --accent: #FDB462;       /* Vàng cam sáng – hover/nhấn */
+  --highlight: #B7410E;    /* Đỏ đất – dùng làm nổi bật mạnh */
+  --contrast: #8C1E03;     /* Đỏ gạch đậm – thay thế màu đậm khác */
+  --text-dark: #4A1D0F;    /* Nâu đỏ rất đậm – dùng làm chữ đậm */
+  --text-light: #ffffff;   /* Giữ trắng để đảm bảo dễ đọc */
+
+  --day1: #FDE6B1;         /* Nền ngày 1 */
+  --day1-text: #B7410E;    /* Chữ ngày 1 */
+  --day2: #FDB462;         /* Nền ngày 2 */
+  --day2-text: #8C1E03;    /* Chữ ngày 2 */
+  --day3: #E27428;         /* Nền ngày 3 */
+  --day3-text: #4A1D0F;    /* Chữ ngày 3 */
+}

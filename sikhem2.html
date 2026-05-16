@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SA MẠC 2024 – CÙNG MẸ LÊN ĐƯỜNG</title>
+  <title>SIKHEM II – Đuốc Sáng</title>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/samac2024.css" />
+  <link rel="stylesheet" href="css/samac2026.css" />
 </head>
 
 <body class="loading">
@@ -17,8 +17,8 @@
 
   <header>
     <div class="logo">
-      <img src="img/LOGO SM 2024_tách nền.png" alt="Sa Mac 2024 Logo" />
-      <h1>Sa mạc 2024 - Cùng Mẹ lên đường</h1>
+      <img src="img/843e7611d60662583b17.png" alt="SIKHEM Logo" />
+      <h1>SIKHEM II - Đuốc Sáng</h1>
     </div>
     <nav>
       <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -27,6 +27,7 @@
         <a href="#">Giới thiệu</a>
         <a href="#gallery">Hình ảnh</a>
         <a href="#timeline">Lịch trình</a>
+        <a href="scrapbook.html">Scrapbook</a>
         <div class="dropdown">
           <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">Các Sa mạc</a>
           <div class="dropdown-menu" id="submenu">
@@ -43,12 +44,19 @@
   <section class="hero">
     <img src="img/IMG_6186.JPG" class="hero-bg" alt="Hero Background" />
     <div class="hero-content">
-      <h1>Sa mạc 2024</h1>
-      <p><b>Cùng Mẹ lên đường.</b></p>
+      <h1>SIKHEM II</h1>
+      <p><b>Đuốc sáng.</b></p>
       <a href="https://drive.google.com/drive/folders/1TQEp9b9eVnS8AhAVyPlfSOhOufjDVjrU?usp=sharing" class="btn" target="_blank">📷 Hình ảnh Ngày 1</a>
       <a href="https://drive.google.com/drive/folders/1w4IDthHkl29hLqks26hwDDKSeYGP9F_U?usp=sharing" class="btn" target="_blank">📷 Hình ảnh Ngày 2</a>
-      <a href="#" class="btn">📷 Video xịn sò</a>
+      <a href="#" class="btn">📷 Hình ảnh Ngày 3</a>
     </div>
+
+    <div class="countdown-container" id="countdown">
+        <div class="time-block"><span id="days">00</span><p>Ngày</p></div>
+        <div class="time-block"><span id="hours">00</span><p>Giờ</p></div>
+        <div class="time-block"><span id="minutes">00</span><p>Phút</p></div>
+        <div class="time-block"><span id="seconds">00</span><p>Giây</p></div>
+      </div>
   </section>
 
 <section class="section" id="gallery">
@@ -61,7 +69,7 @@
         <a href="img/IMG_5875.JPG" class="lightbox"><img src="img/IMG_5875.JPG" alt="Gallery Image 1" /></a>
         <a href="img/IMG_5911.JPG" class="lightbox"><img src="img/IMG_5911.JPG" alt="Gallery Image 2" /></a>
         <a href="img/IMG_5953.JPG" class="lightbox"><img src="img/IMG_5953.JPG" alt="Gallery Image 3" /></a>
-        </div>
+       </div>
     </div>
 
     <button class="gallery-btn next" onclick="moveGallery(1)">&#10095;</button>
@@ -141,7 +149,7 @@
   </section>
 
   <footer>
-    &copy; <b>2024 CÙNG MẸ LÊN ĐƯỜNG – THIẾT KẾ VÀ PHÁT TRIỂN BỞI BAN TRUYỀN THÔNG XỨ ĐOÀN.</b>
+    &copy; <b>2026 SIKHEM II – THIẾT KẾ VÀ PHÁT TRIỂN BỞI BAN TRUYỀN THÔNG XỨ ĐOÀN.</b>
   </footer>
 
   <div id="lightbox-overlay">
