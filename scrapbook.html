@@ -9,14 +9,9 @@
     href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Caveat:wght@400;700&family=Permanent+Marker&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Caveat:wght@400;700&family=Sriracha&display=swap"
-    rel="stylesheet" />
-
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/samac2026.css" />
   <link rel="stylesheet" href="css/scrapbook.css" />
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
@@ -34,286 +29,288 @@
       <button class="menu-toggle" onclick="toggleMenu()">☰</button>
       <div class="nav-links">
         <a href="index.html">Trang chủ</a>
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">Các Sa mạc</a>
-          <div class="dropdown-menu" id="submenu">
-            <a href="taisinhtrongthanhthan.html" class="dropdown-item">Sa mạc 2023</a>
-            <a href="cungmelenduong.html" class="dropdown-item">Sa mạc 2024</a>
-            <a href="index.html" class="dropdown-item">Sa mạc 2025</a>
-            <a href="sikhem2.html" class="dropdown-item">Sa mạc 2026</a>
-          </div>
-        </div>
       </div>
     </nav>
   </header>
 
   <div class="scrapbook-container">
     <aside class="editor-panel">
-      <!-- DRAG HANDLE (mobile only, shown via CSS) -->
       <div class="mobile-drag-handle" onclick="toggleEditor()">
         <div class="handle-bar"></div>
         <span class="handle-text" id="handle-title">CÔNG CỤ THIẾT KẾ • Nhấn để mở</span>
       </div>
 
-      <!-- TAB BAR (mobile only, shown via CSS) -->
       <div class="panel-tabs">
-        <button class="panel-tab" data-tab="layout">📐 Bố cục</button>
-        <button class="panel-tab" data-tab="photos">🖼️ Ảnh</button>
-        <button class="panel-tab" data-tab="stickers">✨ Sticker</button>
-        <button class="panel-tab" data-tab="text">✍️ Chữ</button>
+        <button class="panel-tab active" data-tab="layout">📐 Bố cục</button>
+        <button class="panel-tab" data-tab="frames">🖼️ Khung ảnh</button>
+        <button class="panel-tab" data-tab="stickers">✨ Nhãn dán</button>
+        <button class="panel-tab" data-tab="text">✍️ Ghi chú</button>
         <button class="panel-tab" data-tab="export">⬇️ Xuất</button>
       </div>
 
       <div class="panel-header">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
         <h2>Thiết kế Feed Kỷ Niệm</h2>
-        <p>Tùy chỉnh linh hoạt bố cục, ảnh nền và các chi tiết phụ kiện trang trí theo ý muốn.</p>
+        <p>Bảng điều khiển kiểu Canva — Vuốt trên ảnh để kéo góc hiển thị, chọn khung hình, thêm sticker cực chất.</p>
       </div>
 
       <div class="panel-scrollable">
 
-        <!-- BỐ CỤC -->
-        <div class="tab-section" id="tab-layout">
+        <!-- TAB 1: BỐ CỤC -->
+        <div class="tab-section active" id="tab-layout">
           <div class="control-group">
             <label>Bố cục Scrapbook</label>
             <div class="layout-switch">
-              <button type="button" class="btn-layout active" onclick="setLayout('horizontal', this)">⬛ NGANG</button>
-              <button type="button" class="btn-layout" onclick="setLayout('vertical', this)">⬜ DỌC</button>
+              <button type="button" class="btn-layout active" onclick="setLayout('horizontal', this)">⬛ BẢN
+                NGANG</button>
+              <button type="button" class="btn-layout" onclick="setLayout('vertical', this)">⬜ BẢN DỌC</button>
             </div>
           </div>
           <div class="control-group">
-            <label>Ảnh nền phía sau</label>
-            <div class="upload-item" style="padding:0;border:none;background:transparent;margin-bottom:0;">
-              <label class="file-label bg-upload-btn" style="margin-bottom:10px;">
-                <i class="fa-solid fa-images"></i>
-                <span>Thay đổi ảnh nền chính</span>
-                <input type="file" accept="image/*" onchange="handleBgUpload(event)" />
-              </label>
-              <div class="zoom-control">
-                <i class="fa-solid fa-magnifying-glass-minus"></i>
-                <input type="range" id="bg-zoom-slider" min="50" max="300" value="100"
-                  oninput="zoomImage('bg-img', this.value)">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </div>
+            <label>Thay ảnh nền chính</label>
+            <label class="upload-box">
+              <i class="fa-solid fa-images"></i>
+              <span>Chọn ảnh nền từ máy</span>
+              <input type="file" accept="image/*" onchange="handleBgUpload(event)" />
+            </label>
+          </div>
+          <div class="control-group">
+            <label>Phóng to ảnh nền</label>
+            <div class="zoom-control" style="display:flex;align-items:center;gap:10px;">
+              <i class="fa-solid fa-magnifying-glass-minus" style="color:#888;"></i>
+              <input type="range" id="bg-zoom-slider" min="50" max="300" value="100" oninput="zoomBg(this.value)"
+                style="flex:1;accent-color:#4ab362;">
+              <i class="fa-solid fa-magnifying-glass-plus" style="color:#888;"></i>
             </div>
           </div>
         </div>
 
-        <!-- ẢNH -->
-        <div class="tab-section" id="tab-photos">
-          <div class="upload-zone">
-            <div class="upload-item">
-              <label class="file-label">
-                <i class="fa-solid fa-camera"></i>
-                <span>Ảnh 1 (Khung Mac)</span>
-                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-1')" />
-              </label>
-              <div class="zoom-control">
-                <i class="fa-solid fa-magnifying-glass-minus"></i>
-                <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-1', this.value)">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </div>
-            </div>
-            <div class="upload-item">
-              <label class="file-label">
-                <i class="fa-solid fa-image"></i>
-                <span>Ảnh 2 (Polaroid vuông)</span>
-                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-2')" />
-              </label>
-              <div class="zoom-control">
-                <i class="fa-solid fa-magnifying-glass-minus"></i>
-                <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-2', this.value)">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </div>
-            </div>
-            <div class="upload-item">
-              <label class="file-label">
-                <i class="fa-solid fa-music"></i>
-                <span>Ảnh 3 (Music Cover)</span>
-                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'target-img-3')" />
-              </label>
-              <div class="zoom-control">
-                <i class="fa-solid fa-magnifying-glass-minus"></i>
-                <input type="range" min="50" max="250" value="100" oninput="zoomImage('target-img-3', this.value)">
-                <i class="fa-solid fa-magnifying-glass-plus"></i>
-              </div>
+        <!-- TAB 2: KHUNG ẢNH -->
+        <div class="tab-section" id="tab-frames">
+          <div class="control-group">
+            <label>Khung hình (Nhấp đúp vào ảnh để thay)</label>
+            <div class="elements-grid">
+              <div class="element-option-card" onclick="spawnFrame('mac')"><i class="fa-solid fa-laptop"></i><span>OS
+                  Window</span></div>
+              <div class="element-option-card" onclick="spawnFrame('classic')"><i
+                  class="fa-regular fa-square"></i><span>Classic Polar</span></div>
+              <div class="element-option-card" onclick="spawnFrame('modern')"><i
+                  class="fa-solid fa-note-sticky"></i><span>Tape Polar</span></div>
+              <div class="element-option-card" onclick="spawnFrame('music')"><i
+                  class="fa-solid fa-compact-disc"></i><span>Music Deck</span></div>
+              <div class="element-option-card" onclick="spawnFrame('stamp')"><i
+                  class="fa-solid fa-envelope-open-text"></i><span>Post Stamp</span></div>
+              <div class="element-option-card" onclick="spawnFrame('film')"><i class="fa-solid fa-film"></i><span>Film
+                  Strip</span></div>
+              <div class="element-option-card" onclick="spawnFrame('heart')"><i
+                  class="fa-solid fa-heart"></i><span>Heart Shape</span></div>
+              <div class="element-option-card" onclick="spawnFrame('torn')"><i
+                  class="fa-solid fa-scissors"></i><span>Torn Edge</span></div>
+              <div class="element-option-card" onclick="spawnFrame('circle')"><i
+                  class="fa-solid fa-circle-dot"></i><span>Circle Badge</span></div>
             </div>
           </div>
         </div>
 
-        <!-- STICKER -->
+        <!-- TAB 3: STICKERS -->
         <div class="tab-section" id="tab-stickers">
           <div class="control-group">
-            <label>Kho Sticker — Nhấn để thêm vào canvas</label>
-            <div class="sticker-color-picker">
-              <label for="sticker-color">Màu:</label>
-              <input type="color" id="sticker-color" value="#ffbd2e" title="Chọn màu cho Sticker" />
+            <label>Đổi màu Sticker biểu tượng</label>
+            <div class="gradient-picker">
+              <div class="grad-btn" style="background: #2c3e50;" onclick="selectStickerStyle('solid', '#2c3e50')"></div>
+              <div class="grad-btn" style="background: linear-gradient(45deg, #ff7e5f, #feb47b);"
+                onclick="selectStickerStyle('gradient-sunset')"></div>
+              <div class="grad-btn" style="background: linear-gradient(45deg, #00f2fe, #4facfe);"
+                onclick="selectStickerStyle('gradient-neon')"></div>
+              <div class="grad-btn" style="background: linear-gradient(45deg, #ff9a9e, #fecfef);"
+                onclick="selectStickerStyle('gradient-sweet')"></div>
+              <div class="grad-btn" style="background: linear-gradient(45deg, #0575e6, #00f260);"
+                onclick="selectStickerStyle('gradient-ocean')"></div>
             </div>
-            <div class="icon-picker">
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-heart')" title="Trái tim"><i class="fa-solid fa-heart"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-star')" title="Ngôi sao"><i class="fa-solid fa-star"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-leaf')" title="Chiếc lá"><i class="fa-solid fa-leaf"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-crown')" title="Vương miện"><i class="fa-solid fa-crown"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-music')" title="Âm nhạc"><i class="fa-solid fa-music"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-camera')" title="Máy ảnh"><i class="fa-solid fa-camera"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-plane')" title="Máy bay"><i class="fa-solid fa-plane"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-fire')" title="Lửa"><i class="fa-solid fa-fire"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-bolt')" title="Tia chớp"><i class="fa-solid fa-bolt"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-paw')" title="Dấu chân"><i class="fa-solid fa-paw"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-clover')" title="Cỏ 4 lá"><i class="fa-solid fa-clover"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-sun')" title="Mặt trời"><i class="fa-solid fa-sun"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-moon')" title="Mặt trăng"><i class="fa-solid fa-moon"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-ghost')" title="Ma cute"><i class="fa-solid fa-ghost"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-campground')" title="Cắm trại"><i class="fa-solid fa-campground"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-regular fa-face-smile')" title="Mặt cười"><i class="fa-regular fa-face-smile"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-face-grin-hearts')" title="Mắt trái tim"><i class="fa-solid fa-face-grin-hearts"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-face-laugh-squint')" title="Cười tít mắt"><i class="fa-solid fa-face-laugh-squint"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-thumbs-up')" title="Like"><i class="fa-solid fa-thumbs-up"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-heart-crack')" title="Tim vỡ"><i class="fa-solid fa-heart-crack"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-gift')" title="Hộp quà"><i class="fa-solid fa-gift"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-cake-candles')" title="Bánh sinh nhật"><i class="fa-solid fa-cake-candles"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-gem')" title="Kim cương"><i class="fa-solid fa-gem"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-tree')" title="Cây xanh"><i class="fa-solid fa-tree"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-seedling')" title="Mầm cây"><i class="fa-solid fa-seedling"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-cloud')" title="Đám mây"><i class="fa-solid fa-cloud"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-snowflake')" title="Bông tuyết"><i class="fa-solid fa-snowflake"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-rainbow')" title="Cầu vồng"><i class="fa-solid fa-rainbow"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-cat')" title="Mèo"><i class="fa-solid fa-cat"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-dog')" title="Chó"><i class="fa-solid fa-dog"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-dove')" title="Bồ câu"><i class="fa-solid fa-dove"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-frog')" title="Ếch"><i class="fa-solid fa-frog"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-mug-hot')" title="Cà phê"><i class="fa-solid fa-mug-hot"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-pizza-slice')" title="Pizza"><i class="fa-solid fa-pizza-slice"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-ice-cream')" title="Kem"><i class="fa-solid fa-ice-cream"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-rocket')" title="Tên lửa"><i class="fa-solid fa-rocket"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-fire-flame-curved')" title="Lửa bùng"><i class="fa-solid fa-fire-flame-curved"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-mountain-sun')" title="Núi non"><i class="fa-solid fa-mountain-sun"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-map-location-dot')" title="Bản đồ"><i class="fa-solid fa-map-location-dot"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-thumbtack')" title="Đinh ghim"><i class="fa-solid fa-thumbtack"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-palette')" title="Bảng màu"><i class="fa-solid fa-palette"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-peace')" title="Hòa bình"><i class="fa-solid fa-peace"></i></button>
-              <button class="icon-btn" onclick="addSticker('fa-solid fa-yin-yang')" title="Âm dương"><i class="fa-solid fa-yin-yang"></i></button>
+          </div>
+          <div class="control-group">
+            <label>Kho Sticker Khổng Lồ (100+ Lựa chọn)</label>
+            <div class="massive-icon-grid">
+              <button class="icon-btn" onclick="addFASticker('fa-solid fa-heart')"><i
+                  class="fa-solid fa-heart"></i></button>
+              <button class="icon-btn" onclick="addFASticker('fa-solid fa-star')"><i
+                  class="fa-solid fa-star"></i></button>
+              <button class="icon-btn" onclick="addFASticker('fa-solid fa-crown')"><i
+                  class="fa-solid fa-crown"></i></button>
+              <button class="icon-btn" onclick="addFASticker('fa-solid fa-leaf')"><i
+                  class="fa-solid fa-leaf"></i></button>
+              <button class="icon-btn" onclick="addFASticker('fa-solid fa-music')"><i
+                  class="fa-solid fa-music"></i></button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌈')">🌈</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌸')">🌸</button>
+              <button class="icon-btn" onclick="addEmojiSticker('✨')">✨</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🦋')">🦋</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🔥')">🔥</button>
+              <button class="icon-btn" onclick="addEmojiSticker('⚡')">⚡</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌟')">🌟</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💖')">💖</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍀')">🍀</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌻')">🌻</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌺')">🌺</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌼')">🌼</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌷')">🌷</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌴')">🌴</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌵')">🌵</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🪴')">🪴</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍄')">🍄</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🪐')">🪐</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌙')">🌙</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🌞')">🌞</button>
+              <button class="icon-btn" onclick="addEmojiSticker('☁️')">☁️</button>
+              <button class="icon-btn" onclick="addEmojiSticker('❄️')">❄️</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍓')">🍓</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍒')">🍒</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍉')">🍉</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍑')">🍑</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍋')">🍋</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🥑')">🥑</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍕')">🍕</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍔')">🍔</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍟')">🍟</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍦')">🍦</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍰')">🍰</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎂')">🎂</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🍿')">🍿</button>
+              <button class="icon-btn" onclick="addEmojiSticker('☕')">☕</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🧋')">🧋</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🥂')">🥂</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🧸')">🧸</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎀')">🎀</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎈')">🎈</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎉')">🎉</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎁')">🎁</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎨')">🎨</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💎')">💎</button>
+              <button class="icon-btn" onclick="addEmojiSticker('👑')">👑</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💍')">💍</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🕶️')">🕶️</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🚀')">🚀</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🛸')">🛸</button>
+              <button class="icon-btn" onclick="addEmojiSticker('✈️')">✈️</button>
+              <button class="icon-btn" onclick="addEmojiSticker('📸')">📸</button>
+              <button class="icon-btn" onclick="addEmojiSticker('📼')">📼</button>
+              <button class="icon-btn" onclick="addEmojiSticker('📻')">📻</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎧')">🎧</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎸')">🎸</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🎹')">🎹</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🧩')">🧩</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🪀')">🪀</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🪄')">🪄</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🔮')">🔮</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🧿')">🧿</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐶')">🐶</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐱')">🐱</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🦊')">🦊</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐻')">🐻</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐼')">🐼</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐨')">🐨</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐸')">🐸</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐥')">🐥</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐧')">🐧</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐢')">🐢</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🦕')">🦕</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐙')">🐙</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐳')">🐳</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐬')">🐬</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐝')">🐝</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🐞')">🐞</button>
+              <button class="icon-btn" onclick="addEmojiSticker('👻')">👻</button>
+              <button class="icon-btn" onclick="addEmojiSticker('👽')">👽</button>
+              <button class="icon-btn" onclick="addEmojiSticker('👾')">👾</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🤖')">🤖</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💯')">💯</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💢')">💢</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💦')">💦</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💨')">💨</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💫')">💫</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🔥')">🔥</button>
+              <button class="icon-btn" onclick="addEmojiSticker('❤️')">❤️</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🧡')">🧡</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💛')">💛</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💚')">💚</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💙')">💙</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💜')">💜</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🖤')">🖤</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🤍')">🤍</button>
+              <button class="icon-btn" onclick="addEmojiSticker('🤎')">🤎</button>
+              <button class="icon-btn" onclick="addEmojiSticker('💔')">💔</button>
+              <button class="icon-btn" onclick="addEmojiSticker('❤️‍🔥')">❤️‍🔥</button>
+              <button class="icon-btn" onclick="addEmojiSticker('❤️‍🩹')">❤️‍🩹</button>
             </div>
           </div>
         </div>
-
-        <!-- CHỮ -->
+        <!-- TAB 4: CHỮ & NOTE -->
         <div class="tab-section" id="tab-text">
           <div class="control-group">
-            <label>Tiêu đề chính</label>
-            <input type="text" id="input-title" value="GO PRO FOR LIFE" oninput="updateText()" />
+            <label>Màu sắc chữ</label>
+            <div class="gradient-picker">
+              <!-- Thêm nút Màu Trắng -->
+              <div class="grad-btn" style="background: #ffffff; border: 2px solid #ccc;"
+                onclick="selectStickerStyle('solid', '#ffffff')"></div>
+              <div class="grad-btn" style="background: #2c3e50;" onclick="selectStickerStyle('solid', '#2c3e50')"></div>
+              <div class="grad-btn" style="background: linear-gradient(45deg, #ff7e5f, #feb47b);"
+                onclick="selectStickerStyle('gradient-sunset')"></div>
+              <div class="grad-btn" style="background: linear-gradient(45deg, #00f2fe, #4facfe);"
+                onclick="selectStickerStyle('gradient-neon')"></div>
+              <div class="grad-btn" style="background: linear-gradient(45deg, #ff9a9e, #fecfef);"
+                onclick="selectStickerStyle('gradient-sweet')"></div>
+            </div>
           </div>
           <div class="control-group">
-            <label>Lời nhắn nhủ (viết tay)</label>
-            <textarea id="input-sub" oninput="updateText()" rows="4">Tuổi trẻ này mình cùng nhau Đồng hành trên sa mạc Sikhem2</textarea>
+            <label>Phụ kiện Text & Ghi chú</label>
+            <div class="elements-grid">
+              <div class="element-option-card" onclick="spawnTextElement()">
+                <i class="fa-solid fa-t"></i><span>Chữ Nghệ Thuật</span>
+              </div>
+              <div class="element-option-card" onclick="spawnFrame('stickyNote')">
+                <i class="fa-solid fa-note-sticky" style="color: #f1c40f;"></i><span>Note Viết Tay</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- XUẤT ẢNH -->
+        <!-- TAB 5: XUẤT ẢNH -->
         <div class="tab-section" id="tab-export">
-          <p style="font-size:13px;color:#666;margin:0 0 16px;line-height:1.6;">Tất cả sticker và chỉnh sửa sẽ được ghi vào ảnh. Ảnh xuất có độ phân giải cao (2×).</p>
-          <button class="btn-download" onclick="triggerDownload()">
-            <i class="fa-solid fa-download"></i> XUẤT FILE ẢNH CHẤT LƯỢNG CAO
+          <p style="font-size:12px; color:#777; line-height:1.6; margin-bottom: 20px;">Các tùy chỉnh của bạn sẽ được hợp
+            nhất và xuất ở độ phân giải siêu nét (2x DPI).</p>
+          <button class="btn-export" onclick="triggerDownload()">
+            <i class="fa-solid fa-download"></i> LƯU ẢNH VỀ MÁY
           </button>
         </div>
 
-      </div><!-- end panel-scrollable -->
+      </div>
     </aside>
 
     <div class="canvas-zone">
       <div id="scrapbook-canvas" class="layout-horizontal">
-
         <div class="canvas-bg">
           <img id="bg-img" src="img/IMG_5953.JPG" class="draggable-img" alt="" crossorigin="anonymous" />
         </div>
-        <div class="slide-divider"></div>
-
-        <div class="torn-words-container">
-          <span class="torn-word" style="transform: rotate(-3deg);">XỨ</span>
-          <span class="torn-word" style="transform: rotate(2deg);">ĐOÀN</span>
-          <span class="torn-word" style="transform: rotate(-1deg);">TNTT</span><br>
-          <span class="torn-word" style="transform: rotate(4deg);">CARLO</span>
-          <span class="torn-word" style="transform: rotate(-2deg);">ACUTIS</span>
-        </div>
-
-        <div class="decor-title" id="canvas-title">Những cánh hoa file tàn</div>
-
-        <div class="decor-movable decor-flower" style="display: none;">
-          <div class="flower-garland"><i class="fa-solid fa-leaf"></i>🌸🌼🌿</div>
-        </div>
-
-        <div class="decor-movable decor-ribbon" style="display: none;">
-          <div class="ribbon-bow">🎀</div>
-        </div>
-
-        <div class="decor-movable decor-owl" style="display: none;">
-          <div class="owl-sticker">🦉</div>
-        </div>
-
-        <div class="decor-movable decor-pearl" style="display: none;">
-          <div class="pearl-string">•••••••••••••🔮</div>
-        </div>
-
-        <div class="music-widget decor-movable">
-          <div class="music-cover">
-            <div class="img-crop-window">
-              <img id="target-img-3" src="https://via.placeholder.com/200x200?text=Album+Cover" class="draggable-img"
-                alt="" crossorigin="anonymous" />
-            </div>
-          </div>
-          <div class="music-info">
-            <h4>SIKHEM II Playlist</h4>
-            <p>Vinh Sơn Nghĩa Hòa</p>
-          </div>
-          <div class="music-progress">
-            <div class="progress-bar"></div>
-            <div class="progress-time"><span>1:24</span><span>3:05</span></div>
-          </div>
-          <div class="music-controls">
-            <i class="fa-solid fa-backward-step"></i>
-            <i class="fa-solid fa-circle-play play-btn"></i>
-            <i class="fa-solid fa-forward-step"></i>
-          </div>
-        </div>
-
-        <div class="mac-window decor-movable">
-          <div class="mac-header">
-            <div class="mac-dot dot-red"></div>
-            <div class="mac-dot dot-yellow"></div>
-            <div class="mac-dot dot-green"></div>
-            <div class="mac-title">memories.jpg</div>
-          </div>
-          <div class="mac-body">
-            <div class="img-crop-window">
-              <img id="target-img-1" src="https://via.placeholder.com/600x400?text=Upload+Anh" class="draggable-img"
-                alt="" crossorigin="anonymous" />
-            </div>
-          </div>
-          <div class="washi-tape tape-1"></div>
-        </div>
-
-        <div class="lined-paper-note decor-movable">
-          <svg class="silver-clip" viewBox="0 0 24 60" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12,2 L12,45 C12,50 18,50 18,45 L18,15 C18,12 14,12 14,15 L14,42 C14,44 16,44 16,42 L16,18"
-              fill="none" stroke="#b0bec5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <p id="canvas-sub">Tuổi trẻ này mình cùng nhau<br>Đồng hành trên sa mạc<br>Sikhem 2</p>
-        </div>
-
-        <div class="polaroid-card pos-modern decor-movable">
-          <div class="img-crop-window">
-            <img id="target-img-2" src="https://via.placeholder.com/400x400?text=Upload+Anh" class="draggable-img"
-              alt="" crossorigin="anonymous" />
-          </div>
-          <p class="polaroid-caption">Lưu giữ thanh xuân ♡</p>
-          <div class="washi-tape tape-2"></div>
-        </div>
-
-        <i class="fa-solid fa-star star-cute star-1 decor-movable"></i>
-        <i class="fa-solid fa-star star-cute star-2 decor-movable"></i>
-        <i class="fa-solid fa-star star-cute star-3 decor-movable"></i>
-
       </div>
+    </div>
+  </div>
+  <!-- Thêm phần này vào NGAY TRƯỚC thẻ đóng </body> -->
+
+  <!-- TOOLBAR NỔI CHỈNH SỬA ẢNH (CANVA STYLE) -->
+  <div id="image-edit-toolbar" class="floating-toolbar">
+    <div class="toolbar-header">
+      <span>Chỉnh sửa ảnh</span>
+      <button class="btn-close-edit" onclick="exitImageEditMode()"><i class="fa-solid fa-check"></i> Xong</button>
+    </div>
+    <div class="toolbar-body">
+      <div class="zoom-slider-container">
+        <i class="fa-solid fa-magnifying-glass-minus"></i>
+        <input type="range" id="frame-zoom-slider" min="0.5" max="3" step="0.05" value="1">
+        <i class="fa-solid fa-magnifying-glass-plus"></i>
+      </div>
+      <button class="btn-change-image" id="btn-change-frame-img">
+        <i class="fa-solid fa-image"></i> Thay ảnh khác
+      </button>
     </div>
   </div>
 
