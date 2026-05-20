@@ -713,7 +713,25 @@ function triggerDownload() {
     });
   });
 }
-
+// ==========================================================================
+// 6. GLOBAL EVENT: DESELECT & THOÁT CHỈNH SỬA KHI CHẠM RA NGOÀI
+// ==========================================================================
+document.addEventListener('pointerdown', (e) => {
+  // Chỉ kích hoạt khi người dùng chạm vào vùng trống, nền canvas hoặc ảnh nền chính
+  if (e.target.classList.contains('canvas-zone') || 
+      e.target.id === 'scrapbook-canvas' || 
+      e.target.classList.contains('canvas-bg') || 
+      e.target.id === 'bg-img') {
+    
+    // 1. Gỡ bỏ viền active của tất cả các element
+    document.querySelectorAll('.element-wrapper').forEach(el => {
+      el.classList.remove('active');
+    });
+    
+    // 2. Tắt chế độ Edit Image (Thu hồi Toolbar)
+    exitImageEditMode();
+  }
+}, { passive: true });
 // ==========================================================================
 // 5. KHỞI ĐỘNG
 // ==========================================================================
